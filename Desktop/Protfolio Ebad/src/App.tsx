@@ -232,15 +232,13 @@ const Hero = () => {
 
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-      {/* Background Video with Overlay */}
+      {/* Background Image with Overlay */}
       <motion.div style={{ scale }} className="absolute inset-0 z-0">
-        <video
-          src="/intro.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
+        <img
+          src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?q=80&w=2000&auto=format&fit=crop"
+          alt="Marvel Background"
           className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
+          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
       </motion.div>
@@ -891,6 +889,29 @@ const Footer = () => (
 );
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true);
+
+  if (showIntro) {
+    return (
+      <div className="fixed inset-0 z-[9999] bg-black flex items-center justify-center overflow-hidden">
+        <video
+          src="/intro.mp4"
+          autoPlay
+          muted
+          playsInline
+          onEnded={() => setShowIntro(false)}
+          className="w-full h-full object-cover"
+        />
+        <button
+          onClick={() => setShowIntro(false)}
+          className="absolute bottom-10 right-10 z-50 text-white font-display tracking-widest text-sm transition-all uppercase bg-white/10 hover:bg-marvel-red hover:text-white px-8 py-3 rounded-sm border border-white/20 hover:border-marvel-red backdrop-blur-md"
+        >
+          SKIP INTRO
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-marvel-red selection:text-white overflow-x-hidden">
       <Jarvis />
