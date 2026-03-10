@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Anton", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-marvel-red: #ED1D24;
+  --color-marvel-blue: #003399;
+  --color-marvel-gold: #FFD700;
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white selection:bg-marvel-red selection:text-white;
+  }
+}
+
+.marvel-text-stroke {
+  -webkit-text-stroke: 1px white;
+  color: transparent;
+}
+
+.marvel-gradient {
+  background: linear-gradient(135deg, #ED1D24 0%, #7B0D11 100%);
+}
+
+.glass-panel {
+  @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl;
+}
