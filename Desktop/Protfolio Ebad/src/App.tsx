@@ -890,24 +890,62 @@ const Footer = () => (
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  const startVideo = () => {
+    setIsVideoPlaying(true);
+    if (videoRef.current) {
+      videoRef.current.play();
+      videoRef.current.volume = 1.0;
+    }
+  };
 
   if (showIntro) {
     return (
-      <div className="fixed inset-0 z-[9999] bg-black flex items-center justify-center overflow-hidden">
-        <video
-          src="/intro.mp4"
-          autoPlay
-          muted
-          playsInline
-          onEnded={() => setShowIntro(false)}
-          className="w-full h-full object-cover"
-        />
-        <button
-          onClick={() => setShowIntro(false)}
-          className="absolute bottom-10 right-10 z-50 text-white font-display tracking-widest text-sm transition-all uppercase bg-white/10 hover:bg-marvel-red hover:text-white px-8 py-3 rounded-sm border border-white/20 hover:border-marvel-red backdrop-blur-md"
-        >
-          SKIP INTRO
-        </button>
+      <div className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-md flex items-center justify-center overflow-hidden p-6 md:p-12">
+        <div className="relative w-full max-w-5xl aspect-video bg-black flex items-center justify-center shadow-[0_0_50px_rgba(237,29,36,0.2)] group">
+          
+          {/* Decorative Marvel Frame Border */}
+          <div className="absolute inset-0 border-4 border border-marvel-red pointer-events-none z-10" />
+          
+          {/* Marvel Corners */}
+          <div className="absolute -top-1 -left-1 w-6 h-6 border-t-4 border-l-4 border-marvel-gold z-20 pointer-events-none" />
+          <div className="absolute -top-1 -right-1 w-6 h-6 border-t-4 border-r-4 border-marvel-gold z-20 pointer-events-none" />
+          <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-4 border-l-4 border-marvel-gold z-20 pointer-events-none" />
+          <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-4 border-r-4 border-marvel-gold z-20 pointer-events-none" />
+
+          <video
+            ref={videoRef}
+            src="/intro.mp4"
+            playsInline
+            onEnded={() => setShowIntro(false)}
+            className={`w-full h-full object-cover relative z-0 ${!isVideoPlaying ? 'opacity-30' : 'opacity-100'}`}
+          />
+          
+          {!isVideoPlaying && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center z-30">
+              <button
+                onClick={startVideo}
+                className="bg-marvel-red hover:bg-red-700 text-white font-display px-10 py-5 rounded-sm tracking-[0.3em] text-3xl transition-all shadow-[0_0_30px_rgba(237,29,36,0.6)] hover:scale-105 border border-marvel-red border-b-4 border-r-4 active:border-b active:border-r active:translate-y-1 active:translate-x-1"
+              >
+                PLAY INTRO
+              </button>
+              <div className="mt-8 text-marvel-gold font-mono text-sm tracking-widest uppercase animate-pulse">
+                WARNING: EXTREME VOLUME PROTOCOL
+              </div>
+            </div>
+          )}
+        </div>
+
+        {isVideoPlaying && (
+          <button
+            onClick={() => setShowIntro(false)}
+            className="absolute bottom-10 right-10 z-50 text-white font-display tracking-widest text-sm transition-all uppercase bg-white/10 hover:bg-marvel-red hover:text-white px-8 py-3 rounded-sm border border-white/20 hover:border-marvel-red backdrop-blur-md"
+          >
+            SKIP INTRO
+          </button>
+        )}
       </div>
     );
   }
