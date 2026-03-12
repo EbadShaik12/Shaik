@@ -15,7 +15,8 @@ import {
   Flame,
   Rocket,
   Sword,
-  MapPin
+  MapPin,
+  Download
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -233,15 +234,11 @@ const Hero = () => {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
-      <motion.div style={{ scale }} className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?q=80&w=2000&auto=format&fit=crop"
-          alt="Marvel Background"
-          className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
-          referrerPolicy="no-referrer"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-      </motion.div>
+      <div className="absolute inset-0 z-0 bg-black">
+        {/* Themed background: subtle red radial glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(237,29,36,0.08),transparent_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
+      </div>
 
       <motion.div
         style={{ y: y1, opacity }}
@@ -285,6 +282,15 @@ const Hero = () => {
           </a>
           <a href="#signal" className="border border-white/20 text-white font-display px-8 py-4 rounded-sm tracking-widest hover:bg-white hover:text-black transition-all">
             SEND SIGNAL
+          </a>
+          <a
+            href="https://drive.google.com/file/d/1kyOWs8EnDCa2zXF6P4U-NTKfC1hQyhUh/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-marvel-red text-white font-display px-8 py-4 rounded-sm tracking-widest hover:bg-red-700 transition-all border border-marvel-red"
+          >
+            <Download size={20} />
+            DOWNLOAD CV
           </a>
         </motion.div>
       </motion.div>
@@ -335,7 +341,7 @@ const About = () => {
             <div className="absolute -inset-4 bg-marvel-red/20 rounded-2xl blur-2xl group-hover:bg-marvel-red/30 transition-all" />
             <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10">
               <img
-                src="/Gemini_Generated_Image_yuwgshyuwgshyuwg.png"
+                src="/Ebad.jpeg"
                 alt="Shaik Mohammad Ebad"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
@@ -480,17 +486,10 @@ const Internship = () => {
               <div className="absolute inset-0 bg-marvel-blue/5 rounded-2xl blur-3xl" />
               <div className="relative border border-white/10 rounded-2xl overflow-hidden aspect-video">
                 <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop"
-                  alt="Product Management"
-                  className="w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-700"
-                  referrerPolicy="no-referrer"
+                  src="/languify.png"
+                  alt="Languify Internship"
+                  className="w-full h-full object-contain hover:scale-105 transition-all duration-700"
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-black/60 backdrop-blur-md p-6 border border-white/10 rounded-sm text-center">
-                    <div className="text-3xl font-display text-marvel-blue mb-1">40%</div>
-                    <div className="text-[10px] font-display tracking-widest text-white/60 uppercase">Revenue Growth Contribution</div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

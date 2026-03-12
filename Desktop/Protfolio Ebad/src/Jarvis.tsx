@@ -151,7 +151,8 @@ export const Jarvis = () => {
             responseText = jarvisKnowledge[0].response; // Default greeting if jarvis is mentioned but nothing else matches well
         } else {
             try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIzaSyCHSRv51lr_qiz3TXDIUIk5sqprh8BSCHc`, {
+                const apiKey = (process.env as any).GEMINI_API_KEY || 'AIzaSyCHSRv51lr_qiz3TXDIUIk5sqprh8BSCHc';
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
